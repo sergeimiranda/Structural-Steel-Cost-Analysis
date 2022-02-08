@@ -4,16 +4,18 @@
 
 library(shiny)
 library(ggplot2)
-library(hrbrthemes)
 library(bslib)
-source("Metal_Analysis.r")
+library(hrbrthemes)
+source("Metal_Analysis.R")
+
 
 Variables <- unique(MetalData$Seccion)  # List of unique category values
+
+hrbrthemes::import_roboto_condensed()
 
 # Define UI for application that draws the ScatterPlot
 shinyUI(fluidPage(
     theme = bslib::bs_theme(bootswatch = "darkly"),
-#    theme = bslib::bs_theme(bootswatch = "spacelab"),    
 
     tabsetPanel(
         tabPanel("Information", 
@@ -101,3 +103,7 @@ shinyUI(fluidPage(
     )
     )
 ))
+
+
+
+

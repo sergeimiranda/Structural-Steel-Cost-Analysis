@@ -3,7 +3,7 @@
 ##DATE: 04-02-2022
 
 library(dplyr)
-source("Metal_ETL.r")
+source("Metal_ETL.R")
 
 ##Loading file and getting processed data
   ##INPUT DATA
@@ -18,3 +18,5 @@ source("Metal_ETL.r")
   ##Price/weight ratio
   MetalData$Precio_uss <- MetalData$Precio/DolarValue
   MetalData$PrecioxPeso_uss <- MetalData$Precio_uss/MetalData$Peso
+
+  

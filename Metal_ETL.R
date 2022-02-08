@@ -5,7 +5,7 @@ library(readxl)
 library(stringr)
 
 Metal_ETL <- function (Filename = "2022-01-04_Lista de Precios-Carlos-Isla.xlsx") {
-
+  
 ##Loading file
   if (file.exists(Filename)){
         pricedata <- read_xlsx(Filename, skip = 4)
@@ -18,10 +18,10 @@ Metal_ETL <- function (Filename = "2022-01-04_Lista de Precios-Carlos-Isla.xlsx"
 ##DATA CLEANING
   ##Removing NA files and keeping only needed columns 
   pricedata <- pricedata[!is.na(pricedata[,1]),
-                   c("Artículo","Descripción","Precio","Precio c/IVA")]
+                   c("ArtÃ­culo","DescripciÃ³n","Precio","Precio c/IVA")]
   ##Renaming columns
-  pricedata <- rename(pricedata, "Articulo" = "Artículo", 
-                    "Descripcion" = "Descripción" , "Precio_IVA" = "Precio c/IVA")
+  pricedata <- rename(pricedata, "Articulo" = "ArtÃ­culo", 
+                    "Descripcion" = "DescripciÃ³n" , "Precio_IVA" = "Precio c/IVA")
 
 ##DATA TRANSFORMATION
   ##Making data tidy. Organizing blocks as categories
@@ -214,8 +214,8 @@ Metal_ETL <- function (Filename = "2022-01-04_Lista de Precios-Carlos-Isla.xlsx"
       } 
    ########      
       
-   ##CAÑOS ASTM
-      Selection <- "CAÑOS ASTM" 
+   ##CAÃ‘OS ASTM
+      Selection <- "CAÃ‘OS ASTM" 
       if (grepl(Selection,metal_pricedata$Categoria[i])) {
         Seccion <- str_extract(metal_pricedata$Descripcion[i] , ".*?(?=[(])")
         Seccion <- str_trim(Seccion)
@@ -230,8 +230,8 @@ Metal_ETL <- function (Filename = "2022-01-04_Lista de Precios-Carlos-Isla.xlsx"
       }        
    ########    
    
-   ##CAÑOS USO MECANICO
-      Selection <- "CAÑOS USO MECANICO" 
+   ##CAÃ‘OS USO MECANICO
+      Selection <- "CAÃ‘OS USO MECANICO" 
       if (grepl(Selection,metal_pricedata$Categoria[i])) {
         Seccion <- str_extract(metal_pricedata$Descripcion[i] , ".*?(?=[[:digit:]])")
         Seccion <- str_trim(Seccion)
@@ -251,7 +251,7 @@ Metal_ETL <- function (Filename = "2022-01-04_Lista de Precios-Carlos-Isla.xlsx"
         Medida <- str_trim(str_extract(metal_pricedata$Descripcion[i], "(\\d+).?(?=mm)"))
         Dimension <- Medida   
         Espesor <- NA
-        Longitud <- 1 ## Se coloca un largo genérico, varía entre 3 a 5.9 metros
+        Longitud <- 1 ## Se coloca un largo genÃ©rico, varÃ­a entre 3 a 5.9 metros
         Peso <- str_trim(str_extract(metal_pricedata$Descripcion[i], "((\\d+.\\d+)|(\\d+))+.?(?=k|K)")) # el peso es por unidad de metro
       }        
   ######## 
@@ -377,13 +377,13 @@ Metal_ETL <- function (Filename = "2022-01-04_Lista de Precios-Carlos-Isla.xlsx"
     if (grepl("PERFIL U",metal_pricedata$Seccion[i])) {
       metal_pricedata$Seccion[i] <- "U SECTION"
     }
-    if (grepl("CAÑO USO MECANICO",metal_pricedata$Seccion[i])) {
+    if (grepl("CAÃ‘O USO MECANICO",metal_pricedata$Seccion[i])) {
       metal_pricedata$Seccion[i] <- "TUBE-MECHANICAL USE"
     }
     if (grepl("PERFIL C",metal_pricedata$Seccion[i])) {
       metal_pricedata$Seccion[i] <- "C SECTION"
     }
-    if (grepl("CAÑO ASTM S-40",metal_pricedata$Seccion[i])) {
+    if (grepl("CAÃ‘O ASTM S-40",metal_pricedata$Seccion[i])) {
       metal_pricedata$Seccion[i] <- "TUBE-ASTM S-40"
     }
     if (grepl("PERFIL C GALV",metal_pricedata$Seccion[i])) {
@@ -411,7 +411,7 @@ return (metal_pricedata)
     #  unique(metal_pricedata$Categoria)  #checks vector of unique category values
 
 ###SELECTING  
-#  Selection <- "CAÑOS ASTM" 
+#  Selection <- "CAÃ‘OS ASTM" 
 #  C <- metal_pricedata[metal_pricedata$Categoria == Selection,] 
 #  Medida <-C[5,2]
   
